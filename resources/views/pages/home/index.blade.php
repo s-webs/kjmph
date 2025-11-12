@@ -1,4 +1,36 @@
 @extends('layouts.public')
 @section('content')
-    HOME
+    <div class="">
+        <div class="flex items-center bg-custom-main p-[30px] rounded-xl">
+            <div class="mr-[30px] shrink-0">
+                <img src="/{{ $settings->cover }}" alt="" class="w-[270px]">
+            </div>
+            <div>
+                <div class="text-lg font-semibold text-white">
+                    {{ $settings->description }}
+                </div>
+                <div class="h-[3px] bg-white w-full my-[30px]"></div>
+                <div class="text-lg font-semibold text-white">
+                    <div class="mb-[20px]">
+                        eISSN: <a href="{{ $settings->eissn_link }}" class="underline text-blue-300">{{ $settings->eissn }}</a>
+                    </div>
+                    <div class="mb-[10px]">
+                        {{ __('public.abbreviation_name') }}: {{ $settings->abbreviation_name }}
+                    </div>
+                    <div class="mb-[10px]">
+                        {{ $settings->year_start }}
+                    </div>
+                    <div class="mb-[10px]">
+                        {{ __('public.frequency') }}: {{ $settings->frequency }}
+                    </div>
+                    <div class="mb-[10px]">
+                        {{ __('public.languages') }}: {{ $settings->languages }}
+                    </div>
+                    <div class="">
+                        {{ __('public.certificate_state_registration') }} <a href="{{ $settings->certificate_state_registration_link }}" class="underline text-blue-300">{{ $settings->certificate_state_registration }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
