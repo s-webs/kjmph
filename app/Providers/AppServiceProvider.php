@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Indexer;
 use App\Models\Menu;
 use App\Models\Setting;
 use Illuminate\Support\ServiceProvider;
@@ -25,8 +26,10 @@ class AppServiceProvider extends ServiceProvider
         $menuTree = Menu::roots()
             ->with('childrenRecursive')
             ->get();
+        $indexers = Indexer::all();
 
         view()->share('settings', $settings);
         view()->share('menuTree', $menuTree);
+        view()->share('indexers', $indexers);
     }
 }

@@ -27,7 +27,7 @@
 
     @if($hasChildren)
         <ul class="absolute {{ $submenuPos }} hidden group-hover:block focus-within:block
-                   min-w-56 bg-white shadow-xl rounded-xl py-2 z-50">
+                   min-w-56 bg-white shadow-xl rounded-xl py-2 z-50 list-none pl-0">
             @foreach($item->childrenRecursive as $child)
                 <li class="relative group">
                     <a href="{{ $child->url ?? '#' }}"

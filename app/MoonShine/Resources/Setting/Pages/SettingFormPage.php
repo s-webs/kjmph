@@ -41,6 +41,7 @@ class SettingFormPage extends FormPage
                     ->dir('settings'),
                 Text::make('Название', 'name')->unescape(),
                 Json::make('Настройки', 'options')
+                    ->creatable(false)
                     ->keyValue(),
             ]),
         ];

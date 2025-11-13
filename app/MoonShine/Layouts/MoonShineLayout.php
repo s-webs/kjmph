@@ -12,8 +12,10 @@ use MoonShine\Contracts\ColorManager\ColorManagerContract;
 use MoonShine\Contracts\ColorManager\PaletteContract;
 use MoonShine\MenuManager\MenuItem;
 use App\MoonShine\Resources\Menu\MenuResource;
+use App\MoonShine\Resources\Indexer\IndexerResource;
+use App\MoonShine\Resources\Page\PageResource;
 
-final class MoonShineLayout extends AppLayout
+final class MoonShineLayout extends CustomAppLayout
 {
     /**
      * @var null|class-string<PaletteContract>
@@ -32,6 +34,8 @@ final class MoonShineLayout extends AppLayout
         return [
             ...parent::menu(),
             MenuItem::make(MenuResource::class, 'Меню')->icon('bars-3-bottom-left'),
+            MenuItem::make(PageResource::class, 'Страницы')->icon('newspaper'),
+            MenuItem::make(IndexerResource::class, 'Индексаторы')->icon('globe-alt'),
             MenuItem::make(SettingResource::class)->icon('adjustments-vertical'),
         ];
     }

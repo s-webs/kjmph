@@ -11,7 +11,6 @@ Route::group([
         'web',
     ],
 ], function () {
-    Route::get('/', function () {
-        return view('pages.home.index');
-    });
+    Route::get('/', [\App\Http\Controllers\Public\HomeController::class, 'index'])->name('home');
+    Route::get('/pages/{page}', [\App\Http\Controllers\Public\PagesController::class, 'show'])->name('pages.show');
 });

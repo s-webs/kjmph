@@ -22,8 +22,8 @@ use MoonShine\Laravel\Pages\ProfilePage;
 
 return [
     'title' => env('MOONSHINE_TITLE', 'MoonShine'),
-    'logo' => '/vendor/moonshine/logo-small.svg',
-    'logo_small' => '/vendor/moonshine/logo-small.svg',
+    'logo' => '/assets/img/jms-logo.png',
+    'logo_small' => '/assets/img/jms-logo.png',
 
 
     // Default flags
@@ -35,7 +35,7 @@ return [
 
     // Routing
     'domain' => env('MOONSHINE_DOMAIN'),
-    'prefix' => env('MOONSHINE_ROUTE_PREFIX', 'cms'),
+    'prefix' => env('MOONSHINE_ROUTE_PREFIX', 'jms'),
     'page_prefix' => env('MOONSHINE_PAGE_PREFIX', 'page'),
     'resource_prefix' => env('MOONSHINE_RESOURCE_PREFIX', 'resource'),
     'home_route' => 'moonshine.index',

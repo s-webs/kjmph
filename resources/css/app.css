@@ -10,3 +10,14 @@
     --color-custom-mainDark: #4547A1;
     --color-custom-active: #142247;
 }
+
+@layer base {
+    ul, ol {
+        all: revert;
+    }
+}
+
+
+p a {
+    color: var(--color-custom-main);
+}
