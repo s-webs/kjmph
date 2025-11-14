@@ -39,7 +39,7 @@
         </button>
     </div>
 
-    <div class="mt-[30px] bg-white border-[2px] border-custom-main rounded-xl px-[20px] py-[15px] hidden lg:block">
+    <div class="mt-[30px] bg-white border-[2px] border-custom-main rounded-xl px-[20px] py-[0] hidden lg:block">
         <div class="flex items-center justify-between">
             <div>
                 <x-navbar :items="$menuTree"/>
