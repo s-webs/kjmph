@@ -2,50 +2,28 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources\Page\Pages;
+namespace App\MoonShine\Resources\Release\Pages;
 
-use MoonShine\Laravel\Fields\Slug;
 use MoonShine\Laravel\Pages\Crud\DetailPage;
 use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\TinyMce\Fields\TinyMce;
-use MoonShine\UI\Components\Layout\Box;
-use MoonShine\UI\Components\Layout\Column;
-use MoonShine\UI\Components\Layout\Divider;
-use MoonShine\UI\Components\Layout\Grid;
-use MoonShine\UI\Components\Layout\Html;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\Contracts\UI\FieldContract;
-use App\MoonShine\Resources\Page\PageResource;
+use App\MoonShine\Resources\Release\ReleaseResource;
 use MoonShine\Support\ListOf;
-use MoonShine\UI\Components\Tabs;
-use MoonShine\UI\Components\Tabs\Tab;
-use MoonShine\UI\Fields\ID;
-use MoonShine\UI\Fields\Text;
-use MoonShine\UI\Fields\Textarea;
 use Throwable;
 
 
 /**
- * @extends DetailPage<PageResource>
+ * @extends DetailPage<ReleaseResource>
  */
-class PageDetailPage extends DetailPage
+class ReleaseDetailPage extends DetailPage
 {
     /**
      * @return list<FieldContract>
      */
     protected function fields(): iterable
     {
-        return [
-            ID::make(),
-
-            Text::make('Название', 'name_en')->unescape(),
-            TinyMce::make('Контент EN', 'text_en'),
-            Text::make('Название RU', 'name_ru')->unescape(),
-            TinyMce::make('Контент RU', 'text_ru'),
-
-            Text::make('Название KK', 'name_kk')->unescape(),
-            TinyMce::make('Контент KK', 'text_kk'),
-        ];
+        return [];
     }
 
     protected function buttons(): ListOf

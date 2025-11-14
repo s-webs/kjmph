@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources\Setting\Pages;
+namespace App\MoonShine\Resources\Section\Pages;
 
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Contracts\UI\ComponentContract;
@@ -10,20 +10,18 @@ use MoonShine\Contracts\UI\FormBuilderContract;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
-use App\MoonShine\Resources\Setting\SettingResource;
+use App\MoonShine\Resources\Section\SectionResource;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
-use MoonShine\UI\Fields\Image;
-use MoonShine\UI\Fields\Json;
 use MoonShine\UI\Fields\Text;
 use Throwable;
 
 
 /**
- * @extends FormPage<SettingResource>
+ * @extends FormPage<SectionResource>
  */
-class SettingFormPage extends FormPage
+class SectionFormPage extends FormPage
 {
     /**
      * @return list<ComponentContract|FieldContract>
@@ -33,17 +31,10 @@ class SettingFormPage extends FormPage
         return [
             ID::make(),
             Box::make([
-                Image::make('Логотип', 'logo')
-                    ->disk('public')
-                    ->dir('settings'),
-                Image::make('Обложка', 'cover')
-                    ->disk('public')
-                    ->dir('settings'),
-                Text::make('Название', 'name')->unescape(),
-                Json::make('Настройки', 'options')
-                    ->creatable(false)
-                    ->keyValue(),
-            ]),
+                Text::make('Название EN', 'name_en'),
+                Text::make('Название RU', 'name_ru'),
+                Text::make('Название KK', 'name_kk'),
+            ])
         ];
     }
 
@@ -79,7 +70,7 @@ class SettingFormPage extends FormPage
     protected function topLayer(): array
     {
         return [
-//            ...parent::topLayer()
+            ...parent::topLayer()
         ];
     }
 

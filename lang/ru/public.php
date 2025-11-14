@@ -7,5 +7,7 @@ return [
 
     'frequency' => 'Периодичность',
     'languages' => 'Языки',
-    'certificate_state_registration' => 'Свидетельство о государственной регистрации'
+    'certificate_state_registration' => 'Свидетельство о государственной регистрации',
+
+    'download_full_issue' => 'Скачать весь выпуск'
 ];

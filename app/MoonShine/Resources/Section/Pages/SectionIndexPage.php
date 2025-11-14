@@ -2,34 +2,28 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources\Page\Pages;
+namespace App\MoonShine\Resources\Section\Pages;
 
-use MoonShine\Laravel\Fields\Slug;
-use MoonShine\Laravel\Pages\Crud\DetailPage;
+use MoonShine\Laravel\Pages\Crud\IndexPage;
 use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\TinyMce\Fields\TinyMce;
-use MoonShine\UI\Components\Layout\Box;
-use MoonShine\UI\Components\Layout\Column;
-use MoonShine\UI\Components\Layout\Divider;
-use MoonShine\UI\Components\Layout\Grid;
-use MoonShine\UI\Components\Layout\Html;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\Contracts\UI\FieldContract;
-use App\MoonShine\Resources\Page\PageResource;
+use MoonShine\Laravel\QueryTags\QueryTag;
+use MoonShine\UI\Components\Metrics\Wrapped\Metric;
+use App\MoonShine\Resources\Section\SectionResource;
 use MoonShine\Support\ListOf;
-use MoonShine\UI\Components\Tabs;
-use MoonShine\UI\Components\Tabs\Tab;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
-use MoonShine\UI\Fields\Textarea;
 use Throwable;
 
 
 /**
- * @extends DetailPage<PageResource>
+ * @extends IndexPage<SectionResource>
  */
-class PageDetailPage extends DetailPage
+class SectionIndexPage extends IndexPage
 {
+    protected bool $isLazy = true;
+
     /**
      * @return list<FieldContract>
      */
@@ -37,14 +31,9 @@ class PageDetailPage extends DetailPage
     {
         return [
             ID::make(),
-
-            Text::make('Название', 'name_en')->unescape(),
-            TinyMce::make('Контент EN', 'text_en'),
-            Text::make('Название RU', 'name_ru')->unescape(),
-            TinyMce::make('Контент RU', 'text_ru'),
-
-            Text::make('Название KK', 'name_kk')->unescape(),
-            TinyMce::make('Контент KK', 'text_kk'),
+            Text::make('Название EN', 'name_en'),
+            Text::make('Название RU', 'name_ru'),
+            Text::make('Название KK', 'name_kk'),
         ];
     }
 
@@ -54,11 +43,35 @@ class PageDetailPage extends DetailPage
     }
 
     /**
+     * @return list<FieldContract>
+     */
+    protected function filters(): iterable
+    {
+        return [];
+    }
+
+    /**
+     * @return list<QueryTag>
+     */
+    protected function queryTags(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return list<Metric>
+     */
+    protected function metrics(): array
+    {
+        return [];
+    }
+
+    /**
      * @param  TableBuilder  $component
      *
      * @return TableBuilder
      */
-    protected function modifyDetailComponent(ComponentContract $component): ComponentContract
+    protected function modifyListComponent(ComponentContract $component): ComponentContract
     {
         return $component;
     }

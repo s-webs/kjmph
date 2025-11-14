@@ -7,5 +7,7 @@ return [
 
     'frequency' => 'Жиілігі',
     'languages' => 'Тілдер',
-    'certificate_state_registration' => 'Мемлекеттік тіркеу туралы куәлік'
+    'certificate_state_registration' => 'Мемлекеттік тіркеу туралы куәлік',
+
+    'download_full_issue' => 'Бүкіл шығарылымды жүктеп алыңыз',
 ];

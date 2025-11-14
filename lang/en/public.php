@@ -7,5 +7,7 @@ return [
 
     'frequency' => 'Frequency',
     'languages' => 'Languages',
-    'certificate_state_registration' => 'Certificate of State registration'
+    'certificate_state_registration' => 'Certificate of State registration',
+
+    'download_full_issue' => 'Download full issue',
 ];

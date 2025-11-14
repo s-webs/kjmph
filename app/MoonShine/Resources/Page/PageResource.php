@@ -20,8 +20,8 @@ class PageResource extends ModelResource
 {
     protected string $model = Page::class;
 
-    protected string $title = 'Pages';
-    
+    protected string $title = 'Страницы';
+
     /**
      * @return list<class-string<PageContract>>
      */
