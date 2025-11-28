@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Layouts;
 
+use App\MoonShine\Pages\TestPage;
 use App\MoonShine\Resources\Setting\Pages\SettingFormPage;
 use App\MoonShine\Resources\Setting\SettingResource;
 use MoonShine\Laravel\Layouts\AppLayout;
@@ -48,6 +49,7 @@ final class MoonShineLayout extends CustomAppLayout
                 MenuItem::make(SectionResource::class)->icon('list-bullet'),
                 MenuItem::make(ReleaseResource::class)->icon('document-text'),
             ]),
+            MenuItem::make(TestPage::class),
         ];
     }
 

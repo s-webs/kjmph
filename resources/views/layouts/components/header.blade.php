@@ -15,18 +15,32 @@
             </a>
         </div>
 
+
         {{-- Кнопки вход/регистрация на десктопе --}}
         <div class="hidden lg:flex items-center text-white font-semibold text-lg">
-            <div class="mr-[20px]">
-                <a href="##" class="hover:text-custom-active transition-colors duration-300">
-                    {{ __('public.login') }}
-                </a>
-            </div>
-            <div>
-                <a href="##" class="hover:text-custom-active transition-colors duration-300">
-                    {{ __('public.register') }}
-                </a>
-            </div>
+            @auth
+                <div class="mr-[20px]">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                                class="hover:text-custom-active transition-colors duration-300 cursor-pointer">
+                            {{ __('auth.logout') }}
+                        </button>
+                    </form>
+                </div>
+            @else
+                <div class="mr-[20px]">
+                    <a href="{{ route('login') }}" class="hover:text-custom-active transition-colors duration-300">
+                        {{ __('public.login') }}
+                    </a>
+                </div>
+                <div>
+                    <a href="{{ route('register') }}" class="hover:text-custom-active transition-colors duration-300">
+                        {{ __('public.register') }}
+                    </a>
+                </div>
+            @endauth
         </div>
 
         {{-- Бургер для планшетов и смартфонов --}}
@@ -54,6 +68,18 @@
             </div>
         </div>
     </div>
+
+    @auth
+        <div class="mt-[30px]">
+            <div class="mt-[30px] bg-white border-[2px] border-custom-main rounded-xl px-[20px] py-[0] hidden lg:block">
+                <div class="py-[15px]">
+                    <div>
+                        <a href="{{ route('author.articles.index') }}" class="text-custom-main font-semibold">{{ __('public.myarticles') }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endauth
 
     <div>
         <div

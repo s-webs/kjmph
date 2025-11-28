@@ -14,11 +14,6 @@
         type="text/css"
         href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css"
     />
-    <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css"
-    />
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon-180.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16.png">
@@ -26,21 +21,9 @@
     <title>{{ $settings->joournal_name }}</title>
 </head>
 <body>
-<style>[x-cloak] {
-        display: none !important;
-    }</style>
 @stack('styles')
-@include('layouts.components.header')
-<div class="container mx-auto px-4 mt-[30px] flex flex-col lg:flex-row items-stretch">
-    <main class="flex-1">@yield('content')</main>
-
-    <div class="w-[3px] shrink-0 mx-[30px] bg-custom-main self-stretch"></div>
-    <aside class="w-full lg:w-[250px] shrink-0 mt-[30px] lg:mt-[0]">
-        @include('layouts.components.aside')
-    </aside>
-</div>
+@yield()
 @vite('resources/js/app.js')
 @stack('scripts')
-@include('layouts.components.footer')
 </body>
 </html>
