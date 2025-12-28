@@ -25,6 +25,7 @@ use App\MoonShine\Pages\ForgotPage;
 use App\MoonShine\Pages\ProfilePage;
 use App\MoonShine\Pages\SubmissionArticlePage;
 use App\MoonShine\Pages\SubmittedArticlesPage;
+use App\MoonShine\Resources\Collection\CollectionResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -43,6 +44,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 PageResource::class,
                 ReleaseResource::class,
                 SectionResource::class,
+                CollectionResource::class,
             ])
             ->pages([
                 ...$core->getConfig()->getPages(),

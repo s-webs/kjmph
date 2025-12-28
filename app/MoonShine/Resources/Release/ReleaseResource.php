@@ -20,8 +20,8 @@ class ReleaseResource extends ModelResource
 {
     protected string $model = Release::class;
 
-    protected string $title = 'Releases';
-    
+    protected string $title = 'Выпуски';
+
     /**
      * @return list<class-string<PageContract>>
      */

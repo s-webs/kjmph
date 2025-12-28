@@ -1,5 +1,10 @@
 <div>
-    <div class="text-xl font-bold mb-[30px] text-custom-main border-b-2 ">
+    <div class="">
+        <div class="border-b border-b-custom-active md:border-none text-2xl text-custom-main font-bold">
+            eISSN: <a href="{{ $settings->eissn_link }}" class="underline text-blue-700">{{ $settings->eissn }}</a>
+        </div>
+    </div>
+    <div class="text-xl font-bold mb-[30px] text-custom-main border-b-2 mt-[40px]">
         INDEXING/LISTING
     </div>
     <div class="flex flex-wrap items-center flex-row lg:flex-col">

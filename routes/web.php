@@ -21,6 +21,7 @@ Route::group([
     Route::get('/pages/{page}', [\App\Http\Controllers\Public\PagesController::class, 'show'])->name('pages.show');
     Route::get('/release', [\App\Http\Controllers\Public\JournalsController::class, 'release'])->name('journal.release');
     Route::get('/archive', [\App\Http\Controllers\Public\JournalsController::class, 'archive'])->name('journal.archive');
+    Route::get('/collections', [\App\Http\Controllers\Public\CollectionsController::class, 'index'])->name('collections.index');
 
     Route::controller(AuthenticateController::class)->group(function () {
         Route::get('/login', 'form')->middleware('guest')->name('login');

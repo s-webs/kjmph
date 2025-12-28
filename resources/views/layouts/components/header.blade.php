@@ -1,5 +1,19 @@
 @php
-    $labels = ['en' => 'ENG', 'ru' => 'РУС', 'kk' => 'ҚАЗ'];
+    $labels = [
+        'en' => [
+            'label' => 'ENG',
+            'flag' => '/assets/icons/flag_britan.png'
+        ],
+        'kk' => [
+            'label' => 'ҚАЗ',
+            'flag' => '/assets/icons/flag_qazaqstan.png'
+        ],
+        'ru' => [
+            'label' => 'РУС',
+            'flag' => '/assets/icons/flag_russia.png'
+        ]
+];
+    //$labels = ['en' => 'ENG', 'ru' => 'РУС', 'kk' => 'ҚАЗ'];
 @endphp
 
 <header x-data="{ open:false }" class="container mx-auto px-4 mt-[30px]">
@@ -58,11 +72,12 @@
             <div>
                 <x-navbar :items="$menuTree"/>
             </div>
-            <div class="uppercase font-semibold text-lg text-custom-main">
+            <div class="uppercase font-semibold text-lg text-custom-main flex items-center">
                 @foreach($labels as $loc => $label)
                     <a href="{{ localized_switch_url($loc) }}"
-                       class="mr-[10px] hover:text-custom-active {{ app()->getLocale()===$loc ? 'underline' : '' }}">
-                        {{ $label }}
+                       class="mx-2 flex items-center hover:text-custom-active {{ app()->getLocale()===$loc ? 'underline' : '' }}">
+                        <img src="{{ $label['flag'] }}" alt="{{ $label['label'] }}" class="mr-2 w-[30px]">
+                        <span>{{ $label['label'] }}</span>
                     </a>
                 @endforeach
             </div>
@@ -74,7 +89,8 @@
             <div class="mt-[30px] bg-white border-[2px] border-custom-main rounded-xl px-[20px] py-[0] hidden lg:block">
                 <div class="py-[15px]">
                     <div>
-                        <a href="{{ route('author.articles.index') }}" class="text-custom-main font-semibold">{{ __('public.myarticles') }}</a>
+                        <a href="{{ route('author.articles.index') }}"
+                           class="text-custom-main font-semibold">{{ __('public.myarticles') }}</a>
                     </div>
                 </div>
             </div>
@@ -106,7 +122,7 @@
                     @foreach($labels as $loc => $label)
                         <a href="{{ localized_switch_url($loc) }}"
                            class="mr-[10px] hover:text-custom-active {{ app()->getLocale()===$loc ? 'underline' : '' }}">
-                            {{ $label }}
+                            {{ $label['label'] }}
                         </a>
                     @endforeach
                 </div>

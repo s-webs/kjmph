@@ -19,6 +19,7 @@ use App\MoonShine\Resources\Indexer\IndexerResource;
 use App\MoonShine\Resources\Page\PageResource;
 use App\MoonShine\Resources\Release\ReleaseResource;
 use App\MoonShine\Resources\Section\SectionResource;
+use App\MoonShine\Resources\Collection\CollectionResource;
 
 final class MoonShineLayout extends CustomAppLayout
 {
@@ -46,10 +47,12 @@ final class MoonShineLayout extends CustomAppLayout
             ]),
 
             MenuGroup::make('Журнал', [
+                MenuItem::make(CollectionResource::class)->icon('square-3-stack-3d'),
                 MenuItem::make(SectionResource::class)->icon('list-bullet'),
                 MenuItem::make(ReleaseResource::class)->icon('document-text'),
             ]),
             MenuItem::make(TestPage::class),
+
         ];
     }
 
