@@ -31,7 +31,7 @@
     }</style>
 @stack('styles')
 @include('layouts.components.header')
-<div class="container mx-auto px-4 mt-[30px] flex flex-col lg:flex-row items-stretch">
+<div class="container mx-auto px-4 2xl:px-[140px] mt-[30px] flex flex-col lg:flex-row items-stretch">
     <main class="flex-1">@yield('content')</main>
 
     <div class="w-[3px] shrink-0 mx-[30px] bg-custom-main self-stretch"></div>

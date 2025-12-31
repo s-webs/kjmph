@@ -16,7 +16,7 @@
     //$labels = ['en' => 'ENG', 'ru' => 'РУС', 'kk' => 'ҚАЗ'];
 @endphp
 
-<header x-data="{ open:false }" class="container mx-auto px-4 mt-[30px]">
+<header x-data="{ open:false }" class="container mx-auto px-4 2xl:px-[140px] mt-[30px]">
     {{-- Верхняя цветная плашка --}}
     <div class="flex bg-custom-main items-center justify-between p-[20px] rounded-xl">
         <div>

@@ -16,3 +16,6 @@ class Collection extends Model
         'volume', 'number', 'year', 'created_at', 'updated_at'
     ];
 }
+
+
+
