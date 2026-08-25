@@ -26,6 +26,8 @@ use App\MoonShine\Pages\ProfilePage;
 use App\MoonShine\Pages\SubmissionArticlePage;
 use App\MoonShine\Pages\SubmittedArticlesPage;
 use App\MoonShine\Resources\Collection\CollectionResource;
+use App\MoonShine\Resources\Article\ArticleResource;
+use App\MoonShine\Resources\Reviewer\ReviewerResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -45,6 +47,8 @@ class MoonShineServiceProvider extends ServiceProvider
                 ReleaseResource::class,
                 SectionResource::class,
                 CollectionResource::class,
+                ArticleResource::class,
+                ReviewerResource::class,
             ])
             ->pages([
                 ...$core->getConfig()->getPages(),

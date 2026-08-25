@@ -56,6 +56,7 @@ class ArticlesController extends Controller
             'section' => $data['section'],
             'material_lang' => $data['material_lang'],
             'cover' => $coverPath,
+            'file' => $filePath,
             'doi' => null,
 
             'title_en' => $data['title_en'] ?? null,

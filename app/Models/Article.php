@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Models\Concerns\HasLocaleColumns;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Article extends Model
 {
@@ -15,6 +17,7 @@ class Article extends Model
         'section',
         'material_lang',
         'cover',
+        'file',
         'doi',
 
         'title_en',
@@ -51,6 +54,11 @@ class Article extends Model
         return $this->belongsTo(User::class, 'author_id', 'id');
     }
 
+    public function reviewAssignments(): HasMany
+    {
+        return $this->hasMany(ReviewAssignment::class);
+    }
+
     public function addProcessStep(string $status, ?string $label = null, array $extra = []): void
     {
         $timeline = $this->publishing_process ?? [];
@@ -63,6 +71,11 @@ class Article extends Model
 
         $this->publishing_process = $timeline;
         $this->save();
+    }
+
+    public function getCurrentStatus(): ?string
+    {
+        return $this->current_status;
     }
 
     public function getCurrentStatusAttribute(): ?string
@@ -87,5 +100,16 @@ class Article extends Model
         }
 
         return collect($process)->last();
+    }
+
+    /**
+     * Filter by the latest publishing_process status (MySQL JSON).
+     */
+    public function scopeWhereCurrentStatus(Builder $query, string $status): Builder
+    {
+        return $query->whereRaw(
+            "JSON_UNQUOTE(JSON_EXTRACT(publishing_process, CONCAT('\$[', JSON_LENGTH(publishing_process) - 1, '].status'))) = ?",
+            [$status]
+        );
     }
 }

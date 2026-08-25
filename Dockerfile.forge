@@ -1,0 +1,4 @@
+FROM php:8.4-fpm
+RUN docker-php-ext-install pdo_mysql
+ARG WWWUSER=1000
+RUN usermod -u ${WWWUSER} www-data
