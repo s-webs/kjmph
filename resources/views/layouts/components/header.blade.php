@@ -146,14 +146,29 @@
             </div>
 
             <div class="space-y-2 mb-4">
-                <a href="##"
-                   class="block w-full text-left p-2 font-semibold text-custom-main hover:text-custom-active bg-custom-main text-white rounded-lg">
-                    {{ __('public.login') }}
-                </a>
-                <a href="##"
-                   class="block w-full text-left p-2 font-semibold text-custom-main hover:text-custom-active bg-custom-main text-white rounded-lg">
-                    {{ __('public.register') }}
-                </a>
+                @auth
+                    <a href="{{ route('author.articles.index') }}"
+                       class="block w-full text-left p-2 font-semibold bg-custom-main text-white rounded-lg hover:bg-custom-mainDark">
+                        {{ __('public.myarticles') }}
+                    </a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                                class="block w-full text-left p-2 font-semibold bg-custom-main text-white rounded-lg hover:bg-custom-mainDark cursor-pointer">
+                            {{ __('auth.logout') }}
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}"
+                       class="block w-full text-left p-2 font-semibold bg-custom-main text-white rounded-lg hover:bg-custom-mainDark">
+                        {{ __('public.login') }}
+                    </a>
+                    <a href="{{ route('register') }}"
+                       class="block w-full text-left p-2 font-semibold bg-custom-main text-white rounded-lg hover:bg-custom-mainDark">
+                        {{ __('public.register') }}
+                    </a>
+                @endauth
             </div>
 
             <div class="flex-1 overflow-y-auto">

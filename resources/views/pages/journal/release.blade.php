@@ -44,14 +44,55 @@
         </div>
     </div>
     <div class="mt-[30px]">
-        <div>
-            @foreach($sections as $section)
-                <div class="mb-[30px]">
-                    <div class="text-2xl border-b-2 border-custom-main text-custom-main">
-                        <h3>{{ $section->name }}</h3>
-                    </div>
+        @forelse($articlesBySection as $sectionId => $articles)
+            @php
+                $section = $articles->first()?->sectionModel;
+                $sectionName = $section?->name ?? $section?->name_ru ?? 'Раздел';
+            @endphp
+            <div class="mb-[40px]">
+                <div class="text-2xl border-b-2 border-custom-main text-custom-main pb-2 mb-4">
+                    <h3>{{ $sectionName }}</h3>
                 </div>
-            @endforeach
-        </div>
+
+                @foreach($articles as $article)
+                    <article class="mb-6 border-b border-slate-200 pb-6">
+                        <h4 class="text-xl font-semibold text-custom-main">{{ $article->title }}</h4>
+
+                        <div class="mt-2 text-sm text-slate-600">
+                            {{ $article->author?->name }}
+                            @foreach(($article->coauthors ?? []) as $coauthor)
+                                @if(!empty($coauthor['fullname']))
+                                    , {{ $coauthor['fullname'] }}
+                                @endif
+                            @endforeach
+                        </div>
+
+                        @if($article->annotation)
+                            <p class="mt-3 text-slate-700">{{ \Illuminate\Support\Str::limit(strip_tags((string) $article->annotation), 320) }}</p>
+                        @endif
+
+                        <div class="mt-3 flex flex-wrap gap-4 text-sm">
+                            @if($article->doi)
+                                <a href="https://doi.org/{{ ltrim($article->doi, '/') }}"
+                                   target="_blank"
+                                   class="text-custom-main underline">
+                                    DOI: {{ $article->doi }}
+                                </a>
+                            @endif
+
+                            @if($article->file)
+                                <a href="{{ asset('storage/' . $article->file) }}"
+                                   target="_blank"
+                                   class="text-custom-main underline">
+                                    PDF
+                                </a>
+                            @endif
+                        </div>
+                    </article>
+                @endforeach
+            </div>
+        @empty
+            <p class="text-slate-600">В этом выпуске пока нет опубликованных статей.</p>
+        @endforelse
     </div>
 @endsection

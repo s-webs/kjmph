@@ -24,7 +24,7 @@ class ArticleResource extends ModelResource
 
     protected string $column = 'title_ru';
 
-    protected array $with = ['author'];
+    protected array $with = ['author', 'reviewAssignments.reviewer', 'comments', 'release', 'sectionModel'];
 
     /**
      * @return list<class-string<PageContract>>

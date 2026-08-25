@@ -13,9 +13,14 @@ class Collection extends Model
         'description_en', 'description_ru', 'description_kk',
         'slug_en', 'slug_ru', 'slug_kk',
         'cover', 'file', 'url_id', 'doi', 'published_at',
-        'volume', 'number', 'year', 'created_at', 'updated_at'
+        'volume', 'number', 'year', 'created_at', 'updated_at',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'published_at' => 'datetime',
+        ];
+    }
 }
-
-
 

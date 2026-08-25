@@ -115,4 +115,22 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Editor notifications
+    |--------------------------------------------------------------------------
+    */
+    'editor_address' => env('MAIL_EDITOR_ADDRESS'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Anonymous email relay
+    |--------------------------------------------------------------------------
+    */
+    'relay' => [
+        'from_address' => env('MAIL_RELAY_FROM', 'journal@kjmph.kz'),
+        'from_name' => env('MAIL_RELAY_FROM_NAME', 'Редакция журнала'),
+        'domain' => env('MAIL_RELAY_DOMAIN', 'kjmph.kz'),
+    ],
+
 ];

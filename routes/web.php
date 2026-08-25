@@ -6,7 +6,9 @@ use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\MoonShine\Pages\ResetPasswordPage;
 use App\Services\Antiplagiat\AntiplagiatClient;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
@@ -38,6 +40,7 @@ Route::group([
         Route::get('article/create', [\App\Http\Controllers\Author\ArticlesController::class, 'create'])->name('author.article.create');
         Route::post('article/store', [\App\Http\Controllers\Author\ArticlesController::class, 'store'])->name('author.article.store');
         Route::get('article/{article}/details', [\App\Http\Controllers\Author\ArticlesController::class, 'details'])->name('author.article.details');
+        Route::post('article/{article}/revision', [\App\Http\Controllers\Author\ArticlesController::class, 'uploadRevision'])->name('author.article.revision');
     });
 });
 
@@ -56,6 +59,13 @@ Route::controller(RegisterController::class)->middleware('guest')->group(functio
 Route::controller(ProfileController::class)->middleware('auth')->prefix('profile')->group(function () {
     Route::get('/', 'index')->name('profile');
     Route::post('/', 'update')->name('profile.update');
+});
+
+Route::prefix('review')->middleware('web')->group(function () {
+    Route::get('{token}', [\App\Http\Controllers\Reviewer\ReviewerController::class, 'show'])->name('reviewer.show');
+    Route::post('{token}', [\App\Http\Controllers\Reviewer\ReviewerController::class, 'submit'])->name('reviewer.submit');
+    Route::post('{token}/decline', [\App\Http\Controllers\Reviewer\ReviewerController::class, 'decline'])->name('reviewer.decline');
+    Route::get('{token}/download', [\App\Http\Controllers\Reviewer\ReviewerController::class, 'download'])->name('reviewer.download');
 });
 
 

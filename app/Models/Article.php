@@ -15,6 +15,8 @@ class Article extends Model
     protected $fillable = [
         'author_id',
         'section',
+        'release_id',
+        'section_id',
         'material_lang',
         'cover',
         'file',
@@ -61,9 +63,29 @@ class Article extends Model
         return $this->belongsTo(User::class, 'author_id', 'id');
     }
 
+    public function release(): BelongsTo
+    {
+        return $this->belongsTo(Release::class);
+    }
+
+    public function sectionModel(): BelongsTo
+    {
+        return $this->belongsTo(Section::class, 'section_id');
+    }
+
     public function reviewAssignments(): HasMany
     {
         return $this->hasMany(ReviewAssignment::class);
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(ArticleComment::class)->latest();
+    }
+
+    public function messageThreads(): HasMany
+    {
+        return $this->hasMany(MessageThread::class);
     }
 
     public function addProcessStep(string $status, ?string $label = null, array $extra = []): void

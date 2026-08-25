@@ -1,9 +1,8 @@
 @props(['item', 'level' => 0])
 
 @php
-    // Тут подстрой под свою структуру:
-    $children = $item->children ?? collect();   // или $item->children ?? []
-    $hasChildren = $children && count($children);
+    $hasChildren = $item->relationLoaded('childrenRecursive') && $item->childrenRecursive->isNotEmpty();
+    $children = $hasChildren ? $item->childrenRecursive : collect();
     $isRoot = $level === 0;
 @endphp
 
@@ -12,16 +11,14 @@
     class="relative {{ $isRoot ? '' : 'pl-4 border-l border-gray-200' }}"
 >
     <div class="flex items-center justify-between">
-        {{-- Ссылка на пункт меню --}}
         <a
-            href="{{ $item->url ?? '#' }}" {{-- тут подставь свой путь --}}
-        class="py-2 text-sm w-full text-left
+            href="{{ $item->url ?? '#' }}"
+            class="py-2 text-sm w-full text-left
                    {{ $isRoot ? 'font-semibold text-custom-main' : 'text-gray-700' }}"
         >
-            {{ $item->title ?? 'Без названия' }} {{-- подставь своё поле --}}
+            {{ $item->title }}
         </a>
 
-        {{-- Кнопка раскрытия подменю --}}
         @if($hasChildren)
             <button
                 type="button"
@@ -40,7 +37,6 @@
         @endif
     </div>
 
-    {{-- Подменю --}}
     @if($hasChildren)
         <ul
             x-show="open"

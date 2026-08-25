@@ -31,13 +31,13 @@ class StoreArticleRequest extends FormRequest
                 'nullable',
                 'image',
                 'mimes:jpeg,jpg,png,webp',
-                'max:2048', // 2 МБ
+                'max:5120', // 5 МБ
             ],
             'file' => [
                 'required',
                 'file',
                 'mimes:docx,pdf',
-                'max:10240', // 10 МБ
+                'max:40960', // 40 МБ
             ],
 
             // Соавторы (могут отсутствовать)

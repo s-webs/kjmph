@@ -27,7 +27,7 @@
                                     <div class="mr-[5px]"><img src="https://i0.wp.com/info.orcid.org/wp-content/uploads/2021/12/orcid_16x16.gif?resize=16%2C16&ssl=1" alt="orcid"></div>
                                     <div class=""><a href="##" target="_blank">{{ $article->author->name }}</a></div>
                                 </div>
-                                @foreach($article->coauthors as $coauthor)
+                                @foreach($article->coauthors ?? [] as $coauthor)
                                     <div class="flex items-center">
                                         <div class="mr-[5px]"><img src="https://i0.wp.com/info.orcid.org/wp-content/uploads/2021/12/orcid_16x16.gif?resize=16%2C16&ssl=1" alt="orcid"></div>
                                         <div class=""><a href="{{ $coauthor['orcid'] }}" target="_blank">{{ $coauthor['fullname'] }}</a></div>
