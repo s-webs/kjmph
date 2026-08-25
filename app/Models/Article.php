@@ -18,6 +18,10 @@ class Article extends Model
         'material_lang',
         'cover',
         'file',
+        'antiplagiat_doc_id',
+        'antiplagiat_percent',
+        'antiplagiat_checked_at',
+        'antiplagiat_report',
         'doi',
 
         'title_en',
@@ -47,6 +51,9 @@ class Article extends Model
         'metadata' => 'array',
         'publishing_process' => 'array',
         'history' => 'array',
+        'antiplagiat_report' => 'array',
+        'antiplagiat_percent' => 'float',
+        'antiplagiat_checked_at' => 'datetime',
     ];
 
     public function author(): BelongsTo

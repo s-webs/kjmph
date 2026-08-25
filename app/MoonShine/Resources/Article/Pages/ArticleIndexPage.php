@@ -62,6 +62,9 @@ class ArticleIndexPage extends IndexPage
             Select::make('Статус', 'status')
                 ->options([
                     'submitted' => 'Подана (submitted)',
+                    'antiplagiat_pending' => 'Антиплагиат (pending)',
+                    'antiplagiat_done' => 'Антиплагиат (done)',
+                    'antiplagiat_failed' => 'Антиплагиат (failed)',
                     'under_review' => 'На рецензии (under_review)',
                     'revision_required' => 'Требуется правка (revision_required)',
                     'accepted' => 'Принята (accepted)',
