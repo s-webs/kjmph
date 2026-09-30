@@ -16,6 +16,16 @@
 /public/build
 /public/hot
 /public/storage
+# Uploaded content (the public disk points to public/).
+/public/articles/
+/public/collections/
+/public/releases/
+/public/indexators/
+/public/moonshine_users/
+/public/settings/
+# Laravel File Manager shared and per-user folders.
+/public/shares/
+/public/[0-9]*/
 /storage/*.key
 /storage/pail
 /vendor

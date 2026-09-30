@@ -13,10 +13,8 @@ class JournalsController extends Controller
         $release = Release::query()
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())
-            ->orderByDesc('year')
-            ->orderByRaw('COALESCE(volume, 0) DESC')
-            ->orderByDesc('number')
             ->orderByDesc('published_at')
+            ->orderByDesc('id')
             ->firstOrFail();
 
         return $this->renderRelease($release);
