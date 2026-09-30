@@ -44,17 +44,13 @@
         </div>
     </div>
     <div class="mt-[30px]">
-        @forelse($articlesBySection as $sectionId => $articles)
-            @php
-                $section = $articles->first()?->sectionModel;
-                $sectionName = $section?->name ?? $section?->name_ru ?? 'Раздел';
-            @endphp
+        @foreach($sections as $section)
             <div class="mb-[40px]">
                 <div class="text-2xl border-b-2 border-custom-main text-custom-main pb-2 mb-4">
-                    <h3>{{ $sectionName }}</h3>
+                    <h2>{{ $section->name ?? $section->name_ru ?? 'Раздел' }}</h2>
                 </div>
 
-                @foreach($articles as $article)
+                @foreach($articlesBySection->get($section->id, collect()) as $article)
                     <article class="mb-6 border-b border-slate-200 pb-6">
                         <h4 class="text-xl font-semibold text-custom-main">{{ $article->title }}</h4>
 
@@ -91,8 +87,9 @@
                     </article>
                 @endforeach
             </div>
-        @empty
+        @endforeach
+        @if($sections->isEmpty())
             <p class="text-slate-600">В этом выпуске пока нет опубликованных статей.</p>
-        @endforelse
+        @endif
     </div>
 @endsection

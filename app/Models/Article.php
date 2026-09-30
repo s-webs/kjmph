@@ -109,6 +109,10 @@ class Article extends Model
 
     public function getCurrentStatusAttribute(): ?string
     {
+        if ($this->release_id !== null) {
+            return 'published';
+        }
+
         $timeline = $this->publishing_process ?? [];
 
         if (empty($timeline)) {
@@ -132,11 +136,16 @@ class Article extends Model
     }
 
     /**
-     * Filter by the latest publishing_process status (MySQL JSON).
+     * A release assignment publishes the article, including legacy records
+     * whose timeline has not yet been updated.
      */
     public function scopeWhereCurrentStatus(Builder $query, string $status): Builder
     {
-        return $query->whereRaw(
+        if ($status === 'published') {
+            return $query->whereNotNull('release_id');
+        }
+
+        return $query->whereNull('release_id')->whereRaw(
             "JSON_UNQUOTE(JSON_EXTRACT(publishing_process, CONCAT('\$[', JSON_LENGTH(publishing_process) - 1, '].status'))) = ?",
             [$status]
         );

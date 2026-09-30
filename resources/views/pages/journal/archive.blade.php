@@ -8,7 +8,7 @@
                 </div>
                 <div class="mt-[30px] md:mt-[0] w-full">
                     <div class="text-2xl font-semibold text-white">
-                        <h1>{{ $item->title }}</h1>
+                        <h1><a href="{{ route('journal.release.show', $item) }}">{{ $item->title }}</a></h1>
                     </div>
                     <div class="h-[3px] bg-white w-full my-[10px]"></div>
                     <div class="text-md font-semibold text-white">
@@ -35,6 +35,9 @@
                         </div>
                     </div>
                     <div class="h-[3px] bg-white w-full my-[10px]"></div>
+                    <a href="{{ route('journal.release.show', $item) }}" class="inline-block mb-[10px] font-semibold text-white underline">
+                        Статьи выпуска
+                    </a>
                     <div>
                         <a href="/{{ $item->file }}" class="flex font-semibold items-center justify-between text-white bg-custom-active p-[15px] rounded-lg">
                             <span>{{ __('public.download_full_issue') }}</span>

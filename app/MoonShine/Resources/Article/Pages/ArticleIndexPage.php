@@ -41,6 +41,9 @@ class ArticleIndexPage extends IndexPage
             Text::make('Автор', 'author_id', formatted: static function (Article $item): string {
                 return (string) ($item->author?->name ?? '—');
             }),
+            Text::make('Выпуск', 'release_id', formatted: static function (Article $item): string {
+                return (string) ($item->release?->title_ru ?? $item->release?->title_en ?? '—');
+            }),
             Preview::make('Статус', 'publishing_process', formatted: static function (Article $item): string {
                 return (string) ($item->current_status ?? '—');
             })->badge('blue'),
@@ -68,6 +71,7 @@ class ArticleIndexPage extends IndexPage
                     'under_review' => 'На рецензии (under_review)',
                     'revision_required' => 'Требуется правка (revision_required)',
                     'accepted' => 'Принята (accepted)',
+                    'ready_to_publish' => 'Ожидает выпуска (ready_to_publish)',
                     'published' => 'Опубликована (published)',
                     'rejected' => 'Отклонена (rejected)',
                 ])
@@ -94,6 +98,10 @@ class ArticleIndexPage extends IndexPage
             QueryTag::make(
                 'На рецензии',
                 static fn (Builder $query) => $query->whereCurrentStatus('under_review')
+            ),
+            QueryTag::make(
+                'Ожидают выпуск',
+                static fn (Builder $query) => $query->whereCurrentStatus('ready_to_publish')
             ),
             QueryTag::make(
                 'Опубликованные',
