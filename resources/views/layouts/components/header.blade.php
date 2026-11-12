@@ -92,7 +92,7 @@
                aria-label="{{ __('public.search') }}"
                class="flex-1 min-w-0 bg-transparent px-[20px] py-[18px] text-lg outline-none">
         <button type="submit"
-                class="bg-custom-main text-white font-semibold px-[24px] hover:bg-custom-mainDark transition-colors flex items-center gap-2">
+                class="bg-custom-main text-white font-semibold px-[28px] sm:px-[40px] hover:bg-custom-mainDark transition-colors flex items-center justify-center gap-2">
             <i class="ph ph-magnifying-glass text-xl"></i>
             <span class="hidden sm:inline">{{ __('public.search_button') }}</span>
         </button>
