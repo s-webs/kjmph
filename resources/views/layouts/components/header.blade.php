@@ -85,13 +85,14 @@
     </div>
 
     {{-- Поиск на всю ширину контейнера --}}
-    <form action="{{ route('search') }}" method="GET" role="search" class="mt-[30px] flex w-full">
+    <form action="{{ route('search') }}" method="GET" role="search"
+          class="mt-[30px] flex w-full bg-white border-[2px] border-custom-main rounded-xl overflow-hidden focus-within:border-custom-active transition-colors">
         <input type="search" name="q" value="{{ request('q') }}" maxlength="200"
                placeholder="{{ __('public.search_placeholder') }}"
                aria-label="{{ __('public.search') }}"
-               class="flex-1 min-w-0 border-[2px] border-custom-main rounded-l-xl px-[20px] py-[12px] text-lg outline-none focus:border-custom-active">
+               class="flex-1 min-w-0 bg-transparent px-[20px] py-[18px] text-lg outline-none">
         <button type="submit"
-                class="bg-custom-main text-white font-semibold rounded-r-xl px-[20px] border-[2px] border-custom-main hover:bg-custom-mainDark transition-colors flex items-center gap-2">
+                class="bg-custom-main text-white font-semibold px-[24px] hover:bg-custom-mainDark transition-colors flex items-center gap-2">
             <i class="ph ph-magnifying-glass text-xl"></i>
             <span class="hidden sm:inline">{{ __('public.search_button') }}</span>
         </button>
