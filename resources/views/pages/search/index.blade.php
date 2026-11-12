@@ -2,16 +2,6 @@
 @section('content')
     <h1 class="text-3xl font-semibold text-custom-main mb-[20px]">{{ __('public.search') }}</h1>
 
-    <form action="{{ route('search') }}" method="GET" class="flex gap-2 mb-[30px]">
-        <input type="search" name="q" value="{{ $q }}" maxlength="200" autofocus
-               placeholder="{{ __('public.search_placeholder') }}"
-               class="flex-1 border-2 border-custom-main rounded-lg px-4 py-2 outline-none focus:border-custom-active">
-        <button type="submit"
-                class="bg-custom-main text-white font-semibold rounded-lg px-5 hover:bg-custom-mainDark transition-colors">
-            {{ __('public.search_button') }}
-        </button>
-    </form>
-
     @php
         $articleTotal = $articles ? $articles->total() : 0;
         $nothing = $q !== '' && ! $unavailable && $articleTotal === 0

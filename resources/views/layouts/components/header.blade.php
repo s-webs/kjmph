@@ -72,15 +72,6 @@
             <div>
                 <x-navbar :items="$menuTree"/>
             </div>
-            <form action="{{ route('search') }}" method="GET" class="flex items-center mx-4">
-                <input type="search" name="q" value="{{ request('q') }}" maxlength="200"
-                       placeholder="{{ __('public.search') }}"
-                       class="w-[160px] border border-custom-main rounded-l-lg px-3 py-1 text-sm outline-none focus:border-custom-active">
-                <button type="submit" aria-label="{{ __('public.search_button') }}"
-                        class="bg-custom-main text-white rounded-r-lg px-3 py-1 border border-custom-main hover:bg-custom-mainDark">
-                    <i class="ph ph-magnifying-glass"></i>
-                </button>
-            </form>
             <div class="uppercase font-semibold text-lg text-custom-main flex items-center">
                 @foreach($labels as $loc => $label)
                     <a href="{{ localized_switch_url($loc) }}"
@@ -92,6 +83,19 @@
             </div>
         </div>
     </div>
+
+    {{-- Поиск на всю ширину контейнера --}}
+    <form action="{{ route('search') }}" method="GET" role="search" class="mt-[30px] flex w-full">
+        <input type="search" name="q" value="{{ request('q') }}" maxlength="200"
+               placeholder="{{ __('public.search_placeholder') }}"
+               aria-label="{{ __('public.search') }}"
+               class="flex-1 min-w-0 border-[2px] border-custom-main rounded-l-xl px-[20px] py-[12px] text-lg outline-none focus:border-custom-active">
+        <button type="submit"
+                class="bg-custom-main text-white font-semibold rounded-r-xl px-[20px] border-[2px] border-custom-main hover:bg-custom-mainDark transition-colors flex items-center gap-2">
+            <i class="ph ph-magnifying-glass text-xl"></i>
+            <span class="hidden sm:inline">{{ __('public.search_button') }}</span>
+        </button>
+    </form>
 
     @auth
         <div class="mt-[30px]">
@@ -153,16 +157,6 @@
             </span>
                 </a>
             </div>
-
-            <form action="{{ route('search') }}" method="GET" class="flex mb-4">
-                <input type="search" name="q" value="{{ request('q') }}" maxlength="200"
-                       placeholder="{{ __('public.search') }}"
-                       class="flex-1 min-w-0 border border-custom-main rounded-l-lg px-3 py-2 text-sm outline-none">
-                <button type="submit" aria-label="{{ __('public.search_button') }}"
-                        class="bg-custom-main text-white rounded-r-lg px-3 border border-custom-main">
-                    <i class="ph ph-magnifying-glass"></i>
-                </button>
-            </form>
 
             <div class="space-y-2 mb-4">
                 @auth
