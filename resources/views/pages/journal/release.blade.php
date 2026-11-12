@@ -77,7 +77,7 @@
                             @endif
 
                             @if($article->file)
-                                <a href="{{ asset('storage/' . $article->file) }}"
+                                <a href="{{ asset($article->file) }}"
                                    target="_blank"
                                    class="text-custom-main underline">
                                     PDF

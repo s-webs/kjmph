@@ -5,7 +5,7 @@
             <div class="flex flex-col md:flex-row items-center bg-custom-main p-[30px] rounded-xl mb-[30px]">
                 <div class="md:mr-[30px] shrink-0">
                     @if($item->cover)
-                        <img src="{{ asset('storage/' . $item->cover) }}" alt="{{ $item->title }}" class="w-[220px]">
+                        <img src="{{ asset($item->cover) }}" alt="{{ $item->title }}" class="w-[220px]">
                     @endif
                 </div>
                 <div class="mt-[30px] md:mt-[0] w-full">
@@ -35,7 +35,7 @@
                     <div class="h-[3px] bg-white w-full my-[10px]"></div>
                     @php
                         $downloadUrl = $item->file
-                            ? asset('storage/' . $item->file)
+                            ? asset($item->file)
                             : ($item->url_id ?: null);
                     @endphp
                     @if($downloadUrl)

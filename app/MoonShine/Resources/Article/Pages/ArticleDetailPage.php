@@ -95,7 +95,7 @@ class ArticleDetailPage extends DetailPage
         [$statusText, $statusStyle] = $this->statusBadge($article->current_status ?? '');
 
         $cover = $article->cover
-            ? '<img src="' . e(asset('storage/' . $article->cover)) . '" alt="cover" style="width:72px;height:100px;object-fit:cover;border-radius:8px;border:1px solid rgba(100,116,139,.4);flex-shrink:0">'
+            ? '<img src="' . e(asset($article->cover)) . '" alt="cover" style="width:72px;height:100px;object-fit:cover;border-radius:8px;border:1px solid rgba(100,116,139,.4);flex-shrink:0">'
             : '<div style="width:72px;height:100px;border-radius:8px;background:rgba(30,41,59,.8);border:1px solid rgba(100,116,139,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#475569;font-size:22px">📄</div>';
 
         $cText  = 'color:#e2e8f0';
@@ -132,11 +132,11 @@ HTML;
         $date    = $article->created_at?->format('d.m.Y H:i') ?? '—';
 
         $file = $article->file
-            ? '<a href="' . e(asset('storage/' . $article->file)) . '" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:7px;background:rgba(59,130,246,.15);color:#93c5fd;font-size:13px;font-weight:500;text-decoration:none;border:1px solid rgba(59,130,246,.3)">📄 Скачать файл статьи</a>'
+            ? '<a href="' . e(asset($article->file)) . '" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:7px;background:rgba(59,130,246,.15);color:#93c5fd;font-size:13px;font-weight:500;text-decoration:none;border:1px solid rgba(59,130,246,.3)">📄 Скачать файл статьи</a>'
             : '<span style="color:#64748b;font-size:13px">Файл не прикреплён</span>';
 
         $cover = $article->cover
-            ? '<a href="' . e(asset('storage/' . $article->cover)) . '" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:7px;background:rgba(100,116,139,.15);color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;border:1px solid rgba(100,116,139,.3)">🖼 Посмотреть обложку</a>'
+            ? '<a href="' . e(asset($article->cover)) . '" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:7px;background:rgba(100,116,139,.15);color:#94a3b8;font-size:13px;font-weight:500;text-decoration:none;border:1px solid rgba(100,116,139,.3)">🖼 Посмотреть обложку</a>'
             : '<span style="color:#64748b;font-size:13px">Обложка не загружена</span>';
 
         return $this->wrap([
@@ -273,7 +273,7 @@ CARD;
                 $date      = $comment->created_at?->format('d.m.Y H:i') ?? '';
                 $msg       = nl2br(e($comment->message));
                 $fileLink  = $comment->attachment
-                    ? '<div style="margin-top:6px"><a href="' . e(asset('storage/' . $comment->attachment)) . '" target="_blank" style="color:#93c5fd;font-size:12px">📎 Вложение</a></div>'
+                    ? '<div style="margin-top:6px"><a href="' . e(asset($comment->attachment)) . '" target="_blank" style="color:#93c5fd;font-size:12px">📎 Вложение</a></div>'
                     : '';
                 $bubbles .= "<div style='border-radius:8px;{$bg};padding:10px 14px;margin-bottom:8px'><div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:6px'><span style='font-size:12px;font-weight:600;{$nameColor}'>{$who}</span><span style='font-size:11px;color:var(--color-base-text);opacity:.45'>{$date}</span></div><div style='font-size:13px;color:var(--color-base-text);line-height:1.6'>{$msg}</div>{$fileLink}</div>";
             }

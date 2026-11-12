@@ -70,7 +70,7 @@
                                 <p class="mt-2 whitespace-pre-line">{{ $comment->message }}</p>
                                 @if ($comment->attachment)
                                     <a class="mt-2 inline-block text-custom-main underline"
-                                       href="{{ asset('storage/' . $comment->attachment) }}"
+                                       href="{{ asset($comment->attachment) }}"
                                        target="_blank">Вложение</a>
                                 @endif
                             </div>
