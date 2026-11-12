@@ -49,5 +49,15 @@ return [
     'article_submitted_by_author' => 'Статья подана автором',
     'article_has_been_successfully_submitted' => 'Статья успешно подана.',
     'submission_status' => 'Статус публикации',
-    'submitted' => 'Подана'
+    'submitted' => 'Подана',
+    'search' => 'Поиск',
+    'search_button' => 'Найти',
+    'search_placeholder' => 'Статьи, авторы, выпуски, сборники',
+    'search_enter_query' => 'Введите запрос для поиска.',
+    'search_nothing_found' => 'Ничего не найдено.',
+    'search_unavailable' => 'Поиск временно недоступен. Попробуйте позже.',
+    'search_articles' => 'Статьи',
+    'search_authors' => 'Авторы',
+    'search_releases' => 'Выпуски',
+    'search_collections' => 'Сборники',
 ];

@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Scout\Searchable;
 
 class Article extends Model
 {
-    use HasLocaleColumns;
+    use HasLocaleColumns, Searchable;
 
     protected $fillable = [
         'author_id',
@@ -57,6 +58,61 @@ class Article extends Model
         'antiplagiat_percent' => 'float',
         'antiplagiat_checked_at' => 'datetime',
     ];
+
+    protected static function booted(): void
+    {
+        // Состав индекса авторов зависит от опубликованных статей.
+        static::saved(static fn (self $article) => $article->syncAuthorSearch());
+        static::deleted(static fn (self $article) => $article->syncAuthorSearch());
+    }
+
+    public function syncAuthorSearch(): void
+    {
+        $authorId = $this->author_id ?? $this->getOriginal('author_id');
+        $author = $authorId ? User::query()->find($authorId) : null;
+
+        if (! $author) {
+            return;
+        }
+
+        $author->shouldBeSearchable() ? $author->searchable() : $author->unsearchable();
+    }
+
+    /** Статья попадает в поиск, только если выпуск назначен и дата публикации выпуска задана. */
+    public function shouldBeSearchable(): bool
+    {
+        return $this->release_id !== null && $this->release?->published_at !== null;
+    }
+
+    protected function makeAllSearchableUsing(Builder $query): Builder
+    {
+        return $query->with(['author', 'release']);
+    }
+
+    public function toSearchableArray(): array
+    {
+        $authors = collect([$this->author?->name])
+            ->merge(collect($this->coauthors ?? [])->pluck('fullname'))
+            ->filter(static fn ($name) => filled($name))
+            ->values()
+            ->all();
+
+        $data = ['id' => $this->id, 'authors' => $authors, 'doi' => $this->doi];
+
+        foreach (['en', 'ru', 'kk'] as $locale) {
+            foreach (['title', 'subtitle', 'annotation'] as $field) {
+                $value = $this->getAttributes()["{$field}_{$locale}"] ?? null;
+                $data["{$field}_{$locale}"] = filled($value)
+                    ? trim(html_entity_decode(strip_tags((string) $value)))
+                    : null;
+            }
+        }
+
+        // Unix-время: по нему при поиске отсекаются выпуски с будущей датой публикации.
+        $data['release_published_at'] = $this->release?->published_at?->timestamp;
+
+        return $data;
+    }
 
     public function author(): BelongsTo
     {

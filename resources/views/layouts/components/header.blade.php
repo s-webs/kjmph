@@ -72,6 +72,15 @@
             <div>
                 <x-navbar :items="$menuTree"/>
             </div>
+            <form action="{{ route('search') }}" method="GET" class="flex items-center mx-4">
+                <input type="search" name="q" value="{{ request('q') }}" maxlength="200"
+                       placeholder="{{ __('public.search') }}"
+                       class="w-[160px] border border-custom-main rounded-l-lg px-3 py-1 text-sm outline-none focus:border-custom-active">
+                <button type="submit" aria-label="{{ __('public.search_button') }}"
+                        class="bg-custom-main text-white rounded-r-lg px-3 py-1 border border-custom-main hover:bg-custom-mainDark">
+                    <i class="ph ph-magnifying-glass"></i>
+                </button>
+            </form>
             <div class="uppercase font-semibold text-lg text-custom-main flex items-center">
                 @foreach($labels as $loc => $label)
                     <a href="{{ localized_switch_url($loc) }}"
@@ -144,6 +153,16 @@
             </span>
                 </a>
             </div>
+
+            <form action="{{ route('search') }}" method="GET" class="flex mb-4">
+                <input type="search" name="q" value="{{ request('q') }}" maxlength="200"
+                       placeholder="{{ __('public.search') }}"
+                       class="flex-1 min-w-0 border border-custom-main rounded-l-lg px-3 py-2 text-sm outline-none">
+                <button type="submit" aria-label="{{ __('public.search_button') }}"
+                        class="bg-custom-main text-white rounded-r-lg px-3 border border-custom-main">
+                    <i class="ph ph-magnifying-glass"></i>
+                </button>
+            </form>
 
             <div class="space-y-2 mb-4">
                 @auth

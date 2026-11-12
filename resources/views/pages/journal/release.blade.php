@@ -51,7 +51,7 @@
                 </div>
 
                 @foreach($articlesBySection->get($section->id, collect()) as $article)
-                    <article class="mb-6 border-b border-slate-200 pb-6">
+                    <article id="article-{{ $article->id }}" class="mb-6 border-b border-slate-200 pb-6">
                         <h4 class="text-xl font-semibold text-custom-main">{{ $article->title }}</h4>
 
                         <div class="mt-2 text-sm text-slate-600">
