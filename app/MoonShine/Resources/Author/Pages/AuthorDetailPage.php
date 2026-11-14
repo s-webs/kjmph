@@ -26,21 +26,19 @@ class AuthorDetailPage extends DetailPage
     protected function fields(): iterable
     {
         return [
-            Box::make([
-                ID::make(),
-                Text::make('Имя', 'name'),
-                Email::make('Email', 'email'),
-                Text::make('Организация', 'organisation'),
-                Text::make('Страна', 'country'),
-                Preview::make('Статьи', 'id', formatted: static function (User $item): string {
-                    $titles = $item->articles()->latest('id')->get()
-                        ->map(static fn ($a) => e((string) ($a->title ?? '#' . $a->id)))
-                        ->all();
+            ID::make(),
+            Text::make('Имя', 'name'),
+            Email::make('Email', 'email'),
+            Text::make('Организация', 'organisation'),
+            Text::make('Страна', 'country'),
+            Preview::make('Статьи', 'id', formatted: static function (User $item): string {
+                $titles = $item->articles()->latest('id')->get()
+                    ->map(static fn ($a) => e((string) ($a->title ?? '#' . $a->id)))
+                    ->all();
 
-                    return $titles === [] ? '—' : implode('<br>', $titles);
-                })->unescape(),
-                Date::make('Регистрация', 'created_at')->format('d.m.Y H:i'),
-            ]),
+                return $titles === [] ? '—' : implode('<br>', $titles);
+            }),
+            Date::make('Регистрация', 'created_at')->format('d.m.Y H:i'),
         ];
     }
 }
