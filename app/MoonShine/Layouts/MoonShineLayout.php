@@ -22,6 +22,7 @@ use App\MoonShine\Resources\Section\SectionResource;
 use App\MoonShine\Resources\Collection\CollectionResource;
 use App\MoonShine\Resources\Article\ArticleResource;
 use App\MoonShine\Resources\Reviewer\ReviewerResource;
+use App\MoonShine\Resources\Author\AuthorResource;
 
 final class MoonShineLayout extends CustomAppLayout
 {
@@ -51,6 +52,7 @@ final class MoonShineLayout extends CustomAppLayout
             MenuGroup::make('Журнал', [
                 MenuItem::make(ArticleResource::class)->icon('document-duplicate'),
                 MenuItem::make(ReviewerResource::class)->icon('user-group'),
+                MenuItem::make(AuthorResource::class)->icon('users'),
                 MenuItem::make(CollectionResource::class)->icon('square-3-stack-3d'),
                 MenuItem::make(SectionResource::class)->icon('list-bullet'),
                 MenuItem::make(ReleaseResource::class)->icon('document-text'),

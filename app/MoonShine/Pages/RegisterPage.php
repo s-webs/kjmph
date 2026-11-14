@@ -6,6 +6,8 @@ namespace App\MoonShine\Pages;
 
 namespace App\MoonShine\Pages;
 use App\MoonShine\Layouts\FormLayout;
+use App\Services\RegistrationGuard;
+use MoonShine\UI\Components\FlexibleRender;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\UI\Components\ActionButton;
@@ -47,6 +49,7 @@ class RegisterPage extends Page
                         ->required(),
                     PasswordRepeat::make(__('Repeat password'), 'password_confirmation')
                         ->required(),
+                    FlexibleRender::make(static fn (): string => RegistrationGuard::fieldsHtml()),
                 ])->submit(__('Create account'), [
                     'class' => 'btn-primary btn-lg w-full',
                 ])->buttons([

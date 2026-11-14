@@ -20,6 +20,18 @@ class User extends Authenticatable
         // а синхронизируем только при смене публичных полей (и из Article::syncAuthorSearch()).
         static::disableSearchSyncing();
 
+        // Перед удалением автора переносим его имя в статьи, чтобы они не остались «без автора».
+        static::deleting(static function (self $user) {
+            $user->articles()->get()->each(static function (Article $article) use ($user) {
+                $article->forceFill([
+                    'author_name' => filled($article->author_name) ? $article->author_name : $user->name,
+                    'author_id' => null,
+                ])->saveQuietly();
+            });
+        });
+
+        static::deleted(static fn (self $user) => $user->unsearchable());
+
         static::saved(static function (self $user) {
             if ($user->wasChanged(['name', 'organisation'])) {
                 $user->shouldBeSearchable() ? $user->searchable() : $user->unsearchable();

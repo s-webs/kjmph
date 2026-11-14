@@ -18,6 +18,12 @@ return [
         'key' => env('POSTMARK_API_KEY'),
     ],
 
+    // Cloudflare Turnstile (капча на регистрации). Без ключей работают только honeypot и таймер.
+    'turnstile' => [
+        'site_key' => env('TURNSTILE_SITE_KEY'),
+        'secret' => env('TURNSTILE_SECRET_KEY'),
+    ],
+
     'resend' => [
         'key' => env('RESEND_API_KEY'),
     ],

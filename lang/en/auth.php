@@ -21,5 +21,6 @@ return [
     'fullname' => 'Full name',
     'password_field' => 'Password',
     'logout' => 'Logout',
+    'captcha_failed' => 'We could not confirm that you are human. Please refresh the page and try again.',
 
 ];

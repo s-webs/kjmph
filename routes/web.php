@@ -55,7 +55,7 @@ Route::controller(ForgotController::class)->middleware('guest')->group(function 
 
 Route::controller(RegisterController::class)->middleware('guest')->group(function () {
     Route::get('/register', 'form')->name('register');
-    Route::post('/register', 'store')->name('register.store');
+    Route::post('/register', 'store')->middleware('throttle:6,10')->name('register.store');
 });
 
 Route::controller(ProfileController::class)->middleware('auth')->prefix('profile')->group(function () {
