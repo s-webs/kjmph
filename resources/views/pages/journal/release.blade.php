@@ -55,7 +55,7 @@
                         <h4 class="text-xl font-semibold text-custom-main">{{ $article->title }}</h4>
 
                         <div class="mt-2 text-sm text-slate-600">
-                            {{ $article->author?->name }}
+                            {{ $article->author_display_name }}
                             @foreach(($article->coauthors ?? []) as $coauthor)
                                 @if(!empty($coauthor['fullname']))
                                     , {{ $coauthor['fullname'] }}

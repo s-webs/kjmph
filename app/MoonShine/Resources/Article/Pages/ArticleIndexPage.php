@@ -39,7 +39,7 @@ class ArticleIndexPage extends IndexPage
                 return (string) ($item->title ?? $item->title_ru ?? $item->title_en ?? $item->title_kk ?? '—');
             }),
             Text::make('Автор', 'author_id', formatted: static function (Article $item): string {
-                return (string) ($item->author?->name ?? '—');
+                return (string) ($item->author_display_name ?? '—');
             }),
             Text::make('Выпуск', 'release_id', formatted: static function (Article $item): string {
                 return (string) ($item->release?->title_ru ?? $item->release?->title_en ?? '—');

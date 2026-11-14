@@ -15,6 +15,7 @@ class Article extends Model
 
     protected $fillable = [
         'author_id',
+        'author_name',
         'section',
         'release_id',
         'section_id',
@@ -68,14 +69,18 @@ class Article extends Model
 
     public function syncAuthorSearch(): void
     {
-        $authorId = $this->author_id ?? $this->getOriginal('author_id');
-        $author = $authorId ? User::query()->find($authorId) : null;
+        // Текущий и прежний автор (при смене автора старый тоже нужно пересчитать).
+        $ids = array_filter(array_unique([$this->author_id, $this->getOriginal('author_id')]));
 
-        if (! $author) {
-            return;
+        foreach (User::query()->whereIn('id', $ids)->get() as $author) {
+            $author->shouldBeSearchable() ? $author->searchable() : $author->unsearchable();
         }
+    }
 
-        $author->shouldBeSearchable() ? $author->searchable() : $author->unsearchable();
+    /** Имя автора для показа: заданное вручную имеет приоритет над именем пользователя. */
+    public function getAuthorDisplayNameAttribute(): ?string
+    {
+        return filled($this->author_name) ? $this->author_name : $this->author?->name;
     }
 
     /** Статья попадает в поиск, только если выпуск назначен и дата публикации выпуска задана. */
@@ -91,7 +96,7 @@ class Article extends Model
 
     public function toSearchableArray(): array
     {
-        $authors = collect([$this->author?->name])
+        $authors = collect([$this->author_display_name])
             ->merge(collect($this->coauthors ?? [])->pluck('fullname'))
             ->filter(static fn ($name) => filled($name))
             ->values()

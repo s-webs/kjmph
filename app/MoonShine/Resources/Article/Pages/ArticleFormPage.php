@@ -43,7 +43,10 @@ class ArticleFormPage extends FormPage
                 Select::make('Автор', 'author_id')
                     ->options(static fn (): array => User::query()->orderBy('name')->get()
                         ->mapWithKeys(static fn (User $user): array => [$user->id => $user->name . ' (' . $user->email . ')'])->all())
-                    ->searchable()->required(),
+                    ->searchable()->nullable()
+                    ->hint('Выберите зарегистрированного автора или впишите имя вручную ниже'),
+                Text::make('Автор (вручную)', 'author_name')
+                    ->hint('Если заполнено, показывается вместо выбранного автора. Нужно, когда у автора нет учётной записи'),
                 Select::make('Выпуск', 'release_id')
                     ->options(static fn (): array => Release::query()->orderByDesc('year')->orderByDesc('number')->get()
                         ->mapWithKeys(static fn (Release $release): array => [
@@ -102,7 +105,8 @@ class ArticleFormPage extends FormPage
     protected function rules(DataWrapperContract $item): array
     {
         return [
-            'author_id' => ['required', 'integer', Rule::exists('users', 'id')],
+            'author_id' => ['nullable', 'required_without:author_name', 'integer', Rule::exists('users', 'id')],
+            'author_name' => ['nullable', 'required_without:author_id', 'string', 'max:255'],
             'release_id' => ['nullable', 'integer', Rule::exists('releases', 'id')],
             'section' => ['required', 'integer', Rule::exists('sections', 'id')],
             'material_lang' => ['required', Rule::in(['ru', 'en', 'kk'])],

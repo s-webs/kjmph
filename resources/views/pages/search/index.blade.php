@@ -49,7 +49,7 @@
                         <a href="{{ route('journal.release.show', $article->release_id) }}#article-{{ $article->id }}">{{ $article->title }}</a>
                     </h3>
                     <div class="mt-2 text-sm text-slate-600">
-                        {{ collect([$article->author?->name])->merge(collect($article->coauthors ?? [])->pluck('fullname'))->filter()->implode(', ') }}
+                        {{ collect([$article->author_display_name])->merge(collect($article->coauthors ?? [])->pluck('fullname'))->filter()->implode(', ') }}
                     </div>
                     @if($article->annotation)
                         <p class="mt-3 text-slate-700">{{ \Illuminate\Support\Str::limit(strip_tags((string) $article->annotation), 320) }}</p>

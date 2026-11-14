@@ -83,7 +83,7 @@ class ArticleDetailPage extends DetailPage
     private function articleHeader(Article $article): string
     {
         $title   = e($article->title_ru ?? $article->title_en ?? $article->title_kk ?? 'Без названия');
-        $author  = e($article->author?->name ?? '—');
+        $author  = e($article->author_display_name ?? '—');
         $section = e($article->section ?? '—');
         $lang    = match ($article->material_lang) {
             'ru'    => '🇷🇺 Русский',
